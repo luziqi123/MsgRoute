@@ -1,6 +1,7 @@
 package com.simple.msg;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.simple.msg.util.SharedUtil;
 
@@ -9,9 +10,12 @@ import com.simple.msg.util.SharedUtil;
  */
 public class MyApplication extends Application {
 
+    public static Context context;
+
     @Override
     public void onCreate() {
         super.onCreate();
         SharedUtil.init(this);
+        this.context = this;
     }
 }
