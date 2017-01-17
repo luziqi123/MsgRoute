@@ -3,7 +3,7 @@ package com.simple.msg;
 import android.app.Application;
 import android.content.Context;
 
-import com.simple.msg.util.SharedUtil;
+import com.simple.msg.util.NoteUtil;
 
 /**
  * Created by Administrator on 2017/1/16.
@@ -15,7 +15,7 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        SharedUtil.init(this);
+        NoteUtil.init(this);
         this.context = this;
     }
 }

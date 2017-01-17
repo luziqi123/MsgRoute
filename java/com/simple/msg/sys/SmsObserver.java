@@ -1,4 +1,4 @@
-package com.simple.msg.manager;
+package com.simple.msg.sys;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -6,7 +6,10 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Handler;
 
+import com.simple.msg.message.MsgManager;
+
 /**
+ * 监听短信数据库发生变化的内容提供者
  * Created by Administrator on 2017/1/16.
  */
 public class SmsObserver extends android.database.ContentObserver {
@@ -15,9 +18,9 @@ public class SmsObserver extends android.database.ContentObserver {
 
     private Context context;
 
-    private IMsgManager mManager;
+    private MsgManager mManager;
 
-    public SmsObserver(IMsgManager manager , Context context, Handler handler) {
+    public SmsObserver(MsgManager manager , Context context, Handler handler) {
         super(handler);
         this.context = context;
         mManager = manager;

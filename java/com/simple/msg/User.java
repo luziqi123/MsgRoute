@@ -1,19 +1,25 @@
 package com.simple.msg;
 
+import com.simple.msg.util.Constant;
+
 /**
+ * 用户类
  * Created by Administrator on 2017/1/16.
  */
 public class User {
 
-    public String phoneNum = null;
+    public String phoneNum = "";
 
-    public String email = null;
+    public String email = "";
+
+    public String sendMode = Constant.SENT_TO_MSG;
 
     public User(String info){
         String[] split = info.split(":");
-        if (split.length >= 2){
+        if (split.length == 3){
             phoneNum = split[0];
             email = split[1];
+            sendMode = split[2];
         }
     }
 }

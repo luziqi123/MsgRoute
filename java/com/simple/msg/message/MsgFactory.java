@@ -1,7 +1,6 @@
-package com.simple.msg.manager;
+package com.simple.msg.message;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Build;
 
 /**
@@ -10,13 +9,13 @@ import android.os.Build;
  */
 public class MsgFactory {
 
-    private static IMsgManager mMsg;
+    private static MsgManager mMsg;
 
     /**
      * 获取信息管理者
      * @return
      */
-    public static IMsgManager getMsgManager(Activity activity){
+    public static MsgManager getMsgManager(Activity activity){
         if (mMsg != null)return mMsg;
         int sdkInt = Build.VERSION.SDK_INT;
         if (sdkInt < 21){
