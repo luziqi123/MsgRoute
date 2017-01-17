@@ -11,9 +11,11 @@ import java.util.List;
  * 软件配置管理器
  * Created by Administrator on 2017/1/17.
  */
-public class ConfigManager {
+public class ConfigManager implements IConfig{
 
     public Sender mSender;
+
+    private NoteUtil mNoteUtil = NoteUtil.getInstance();
 
     private static ConfigManager instance = new ConfigManager();
     private ConfigManager(){}
@@ -28,7 +30,7 @@ public class ConfigManager {
      * @return
      */
     public boolean addUser(String num , String email){
-        return NoteUtil.addUser(num, email , Constant.SENT_TO_MSG);
+        return mNoteUtil.addUser(num, email , Constant.SENT_TO_MSG);
     }
 
     /**
@@ -36,7 +38,7 @@ public class ConfigManager {
      * @param num
      */
     public void deleUser(String num){
-        NoteUtil.deleUser(num);
+        mNoteUtil.deleUser(num);
     }
 
     /**
@@ -44,7 +46,7 @@ public class ConfigManager {
      * @return
      */
     public List<User> getUsers(){
-        return NoteUtil.getUserGroup();
+        return mNoteUtil.getUserGroup();
     }
 
     /**
@@ -52,15 +54,16 @@ public class ConfigManager {
      * @param mode
      */
     public void setSent2(String num , String mode){
-
+        mNoteUtil.setSent2(num , mode);
     }
     /**
      * 设置收到消息后通过什么方式进行转发(全局)
      * @param mode
      */
     public void setSent2(String mode){
-
+//        mNoteUtil.setSent2(mode);
     }
+
 
     /**
      * 发来设置消息后就会调用这个方法
@@ -76,7 +79,7 @@ public class ConfigManager {
      * @param phoneNum
      */
     public void login(String phoneNum) {
-        NoteUtil.login(phoneNum);
+        mNoteUtil.login(phoneNum);
     }
 
     /**
@@ -85,7 +88,7 @@ public class ConfigManager {
      * @return
      */
     public boolean isUser(String phoneNum) {
-        return NoteUtil.isUser(phoneNum);
+        return mNoteUtil.isUser(phoneNum);
     }
 
     /**
@@ -94,7 +97,7 @@ public class ConfigManager {
      * @return
      */
     public boolean isLogin(String phoneNum) {
-        return NoteUtil.isLogin(phoneNum);
+        return mNoteUtil.isLogin(phoneNum);
     }
 
     /**
@@ -102,7 +105,7 @@ public class ConfigManager {
      * @return
      */
     public String getPas() {
-        return NoteUtil.getPas();
+        return mNoteUtil.getPas();
     }
 
     /**
@@ -110,7 +113,7 @@ public class ConfigManager {
      * @return
      */
     public boolean isSleep() {
-        return NoteUtil.isSleep();
+        return mNoteUtil.isSleep();
     }
 
     /**
@@ -119,6 +122,6 @@ public class ConfigManager {
      * @return
      */
     public void setSleep(boolean isSleep){
-        NoteUtil.setSleep(isSleep);
+        mNoteUtil.setSleep(isSleep);
     }
 }

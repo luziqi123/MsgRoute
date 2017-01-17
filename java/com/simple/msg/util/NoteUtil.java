@@ -3,7 +3,6 @@ package com.simple.msg.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
-import android.widget.Toast;
 
 import com.simple.msg.User;
 
@@ -25,85 +24,86 @@ public class NoteUtil {
 
     public static String loginUsers = "";
 
-    public static void init(Context context){
-        mPreferences = context.getSharedPreferences("msgRoute" , Context.MODE_PRIVATE);
+    private static NoteUtil instance = new NoteUtil();
+    private NoteUtil(){}
+    public static NoteUtil getInstance(){
+        return instance;
+    }
+
+    public static void init(Context context) {
+        mPreferences = context.getSharedPreferences("msgRoute", Context.MODE_PRIVATE);
     }
 
     /**
      * 这个号码是不是用户
+     *
      * @param num
      * @return
      */
-    public static boolean isUser(String num){
+    public boolean isUser(String num) {
         String u = mPreferences.getString("users", "");
         return u.contains(num);
     }
 
     /**
      * 是否是登录账户
+     *
      * @param num
      * @return
      */
-    public static boolean isLogin(String num){
+    public boolean isLogin(String num) {
         return loginUsers.contains(num);
     }
 
     /**
      * 登录
+     *
      * @param num
      */
-    public static void login(String num){
-        if (isLogin(num))return;
+    public void login(String num) {
+        if (isLogin(num)) return;
         loginUsers += num;
     }
 
     /**
      * 退出
+     *
      * @param num
      */
-    public static void sigOut(String num){
-        loginUsers = loginUsers.replace(num , "");
+    public static void sigOut(String num) {
+        loginUsers = loginUsers.replace(num, "");
     }
 
     /**
      * 设置密码
+     *
      * @param oldPas
      * @param nowPas
      */
-    public static void setPas(String oldPas , String nowPas){
-        if (getPas().equals("--") || getPas().equals(oldPas)){
-            mPreferences.edit().putString("pas" , nowPas);
-        }else{
+    public void setPas(String oldPas, String nowPas) {
+        if (getPas().equals("--") || getPas().equals(oldPas)) {
+            mPreferences.edit().putString("pas", nowPas);
+        } else {
             ToastMaker.showLongToast("旧密码错误");
         }
     }
 
     /**
      * 获取密码
+     *
      * @return
      */
-    public static String getPas(){
+    public String getPas() {
         return mPreferences.getString("pas", "--");
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
     /**
      * 获取用户组
+     *
      * @return
      */
-    public static List<User> getUserGroup(){
-        if (!isUpdate)return userList;
+    public static List<User> getUserGroup() {
+        if (!isUpdate) return userList;
         isUpdate = false;
         userList.clear();
         String u = mPreferences.getString("users", "");
@@ -114,31 +114,34 @@ public class NoteUtil {
         return userList;
     }
 
+
     /**
      * 删除用户
+     *
      * @param num
      * @return
      */
-    public static void deleUser(String num){
+    public void deleUser(String num) {
         String u = mPreferences.getString("users", "");
-        if (!u.contains(num))return;
+        if (!u.contains(num)) return;
         isUpdate = true;
         List<User> userGroup = getUserGroup();
-        mPreferences.edit().putString("users" , "").commit();
+        mPreferences.edit().putString("users", "").commit();
         for (User user : userGroup) {
-            if (!user.phoneNum.equals(num)){
-                addUser(user.phoneNum , user.email , user.sendMode);
+            if (!user.phoneNum.equals(num)) {
+                addUser(user.phoneNum, user.email, user.sendMode);
             }
         }
     }
 
     /**
      * 添加用户
+     *
      * @param num
      * @param email
      * @return
      */
-    public static boolean addUser(String num , String email , String mode){
+    public static boolean addUser(String num, String email, String mode) {
         Pattern p = Pattern
                 .compile("^1(3[0-9]|4[57]|5[0-35-9]|7[67]|8[0-9])\\d{8}$");
         Matcher m = p.matcher(num);
@@ -149,18 +152,18 @@ public class NoteUtil {
         Pattern regex = Pattern
                 .compile("^([a-z0-9A-Z]+[-|_|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$");
         Matcher matcher = regex.matcher(email);
-        if (!matcher.matches()){
+        if (!matcher.matches()) {
             ToastMaker.showLongToast("邮箱错误");
             return false;
         }
         String u = mPreferences.getString("users", "");
-        if (u.contains(num)){
+        if (u.contains(num)) {
             ToastMaker.showLongToast("已存在的用户");
             return false;
         }
         isUpdate = true;
         if (TextUtils.isEmpty(u)) {
-            mPreferences.edit().putString("users" , num + ":" + email + ":" + mode).apply();
+            mPreferences.edit().putString("users", num + ":" + email + ":" + mode).apply();
         } else {
             mPreferences.edit().putString("users", u + "-" + num + ":" + email + ":" + mode).apply();
         }
@@ -169,17 +172,41 @@ public class NoteUtil {
 
     /**
      * 是否是睡眠模式
+     *
      * @return
      */
-    public static boolean isSleep() {
+    public boolean isSleep() {
         return mPreferences.getBoolean("sleep", false);
     }
 
     /**
      * 打开 / 关闭睡眠模式
+     *
      * @param sleep
      */
-    public static void setSleep(boolean sleep) {
-        mPreferences.edit().putBoolean("sleep" , sleep).apply();
+    public void setSleep(boolean sleep) {
+        mPreferences.edit().putBoolean("sleep", sleep).apply();
     }
+
+    /**
+     * 设置单个人的发送模式
+     *
+     * @param num
+     * @param mode
+     */
+    public void setSent2(String num, String mode) {
+        String u = mPreferences.getString("users", "");
+        if (!u.contains(num)) return;
+        isUpdate = true;
+        List<User> userGroup = getUserGroup();
+        mPreferences.edit().putString("users", "").commit();
+        for (User user : userGroup) {
+            if (!user.phoneNum.equals(num)) {
+                addUser(user.phoneNum, user.email, user.sendMode);
+            } else {
+                addUser(user.phoneNum, user.email, mode);
+            }
+        }
+    }
+
 }

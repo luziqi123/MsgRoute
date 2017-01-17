@@ -33,6 +33,6 @@ public class Constant {
                     "query " + // 话费
                     "hangup " + // 来电挂断
                     "dot hangup " + // 来电不挂断
-                    "sent " + // 发送信息到指定号码
+                    "sent- " + // 发送信息到指定号码
                     "help "; // 命令查询
 }
