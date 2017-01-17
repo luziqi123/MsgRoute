@@ -102,7 +102,7 @@ public class NoteUtil {
      *
      * @return
      */
-    public static List<User> getUserGroup() {
+    public List<User> getUserGroup() {
         if (!isUpdate) return userList;
         isUpdate = false;
         userList.clear();

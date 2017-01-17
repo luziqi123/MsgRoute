@@ -1,4 +1,4 @@
-package com.simple.msg.config;
+package com.simple.msg.config.settings;
 
 import java.util.Objects;
 

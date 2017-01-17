@@ -18,7 +18,9 @@ public class ConfigManager implements IConfig{
     private NoteUtil mNoteUtil = NoteUtil.getInstance();
 
     private static ConfigManager instance = new ConfigManager();
-    private ConfigManager(){}
+    private ConfigManager(){
+
+    }
     public static ConfigManager getInstance(){
         return instance;
     }
