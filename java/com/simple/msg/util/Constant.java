@@ -16,6 +16,21 @@ public class Constant {
      */
     public static String SENT_TO_EMAIL = "SentToEmail";
 
+
+    public static String CODE_LOGIN = "login-";
+    public static String CODE_OUT = "out";
+    public static String CODE_BIND = "bind";
+    public static String CODE_UNBIND = "unbind";
+    public static String CODE_USERS = "userGroup";
+    public static String CODE_MODE_PRIVATE = "sent2-";
+    public static String CODE_MODE_PUBLIC = "sent2Group-";
+    public static String CODE_SLEEP = "sleep";
+    public static String CODE_WAKE = "wake";
+    public static String CODE_QUERY = "query";
+    public static String CODE_HANGUP = "hangup";
+    public static String CODE_HANGUP_NOT = "dot hangup";
+    public static String CODE_HELP = "help";
+
     /**
      * 所有命令
      */

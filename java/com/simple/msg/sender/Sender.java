@@ -1,6 +1,7 @@
 package com.simple.msg.sender;
 
 import com.simple.msg.User;
+import com.simple.msg.config.ConfigManager;
 import com.simple.msg.util.Constant;
 
 import java.util.List;
@@ -26,17 +27,30 @@ public class Sender {
 
     /**
      * 发送消息给所有用户
-     * @param phoneNum
+     * @param fromNum
      * @param msg
      */
-    public void  sentMsg2User(String phoneNum , String msg){
-        List<User> users = ConfigManager.getInstance().getUsers();
+    public void  sentAll(String fromNum , String msg){
+        List<User> users = ConfigManager.getInstance().getUserList();
         for (User user : users) {
             if (user.sendMode.equals(Constant.SENT_TO_EMAIL)){
-                mSendEmail.sent(phoneNum , msg);
+                mSendEmail.sent(fromNum , msg);
             }else{
-                mSendMsg.sent(phoneNum , msg);
+                mSendMsg.sent(fromNum , msg);
             }
+        }
+    }
+
+    /**
+     * 发送消息给指定用户
+     */
+    public void  sentTo(String toPhone , String fromNum , String msg){
+        User user = ConfigManager.getInstance().getUser(toPhone);
+        if (user == null)return;
+        if (user.sendMode.equals(Constant.SENT_TO_EMAIL)){
+            mSendEmail.sent(fromNum , msg);
+        }else{
+            mSendMsg.sent(fromNum , msg);
         }
     }
 }

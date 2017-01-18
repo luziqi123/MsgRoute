@@ -128,7 +128,7 @@ public class NoteUtil {
      * @param email
      * @return
      */
-    public static boolean addUser(String num, String email, String mode) {
+    public boolean addUser(String num, String email, String mode) {
         Pattern p = Pattern
                 .compile("^1(3[0-9]|4[57]|5[0-35-9]|7[67]|8[0-9])\\d{8}$");
         Matcher m = p.matcher(num);
@@ -196,4 +196,7 @@ public class NoteUtil {
         }
     }
 
+    public void setHangup(boolean hangup) {
+        mPreferences.edit().putBoolean(Constant.CODE_HANGUP , hangup);
+    }
 }

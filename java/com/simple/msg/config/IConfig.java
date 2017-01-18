@@ -45,6 +45,13 @@ public interface IConfig {
     List<User> getUserList();
 
     /**
+     * 根据号码获取用户
+     * @param phone
+     * @return
+     */
+    User getUser(String phone);
+
+    /**
      * 获取全局发送模式
      * @return
      */

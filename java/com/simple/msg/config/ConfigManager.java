@@ -1,8 +1,10 @@
 package com.simple.msg.config;
 
 import com.simple.msg.User;
+import com.simple.msg.config.settings.BindCode;
 import com.simple.msg.config.settings.Code;
 import com.simple.msg.config.settings.LoginCode;
+import com.simple.msg.config.settings.OutCode;
 import com.simple.msg.sender.Sender;
 import com.simple.msg.util.Constant;
 
@@ -22,7 +24,19 @@ public class ConfigManager implements IConfig{
     private static ConfigManager instance = new ConfigManager();
     private ConfigManager(){
         mSettingList = new HashMap<>();
-        mSettingList.put("login" , new LoginCode());
+        mSettingList.put(Constant.CODE_LOGIN , new LoginCode());
+        mSettingList.put(Constant.CODE_OUT , new OutCode());
+        mSettingList.put(Constant.CODE_BIND , new BindCode());
+
+        mSettingList.put(Constant.CODE_UNBIND , new LoginCode());
+        mSettingList.put(Constant.CODE_MODE_PRIVATE , new LoginCode());
+        mSettingList.put(Constant.CODE_MODE_PUBLIC , new LoginCode());
+        mSettingList.put(Constant.CODE_SLEEP , new LoginCode());
+        mSettingList.put(Constant.CODE_WAKE , new LoginCode());
+        mSettingList.put(Constant.CODE_QUERY , new LoginCode());
+        mSettingList.put(Constant.CODE_HANGUP , new LoginCode());
+        mSettingList.put(Constant.CODE_HANGUP_NOT , new LoginCode());
+        mSettingList.put(Constant.CODE_HELP , new LoginCode());
     }
     public static ConfigManager getInstance(){
         return instance;
@@ -66,6 +80,11 @@ public class ConfigManager implements IConfig{
 
     @Override
     public List<User> getUserList() {
+        return null;
+    }
+
+    @Override
+    public User getUser(String phone) {
         return null;
     }
 
