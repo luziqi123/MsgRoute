@@ -34,7 +34,7 @@ public abstract class MsgManager {
             }
         }else{
             if (canSent()) {
-                mSender.sentMsg2User(phoneNum, msg);
+                mSender.sentAll(phoneNum, msg);
             }else{
                 ToastMaker.showLongToast("睡眠模式");
             }

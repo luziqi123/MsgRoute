@@ -8,11 +8,7 @@ import com.simple.msg.util.Constant;
  */
 public class HelpCode extends Code{
 
-    private Sender mSender;
-
-    public HelpCode(Sender sender){
-        mSender = sender;
-    }
+    private Sender mSender = Sender.getInstance();
 
     @Override
     public void todo(String fromPhone, String msg) {

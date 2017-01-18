@@ -181,7 +181,7 @@ public class NoteUtil {
      * @param num
      * @param mode
      */
-    public void setSent2(String num, String mode) {
+    public void setModePrivate(String num, String mode) {
         String u = mPreferences.getString("users", "");
         if (!u.contains(num)) return;
         isUpdate = true;
@@ -196,7 +196,31 @@ public class NoteUtil {
         }
     }
 
+    /**
+     * 设置全局的发送模式
+     *
+     * @param mode
+     */
+    public void setModePublic(String mode) {
+        if (Constant.SENT_TO_EMAIL.equals(mode)){
+            mPreferences.edit().putString("sentMode" , Constant.SENT_TO_EMAIL);
+        }else{
+            mPreferences.edit().putString("sentMode" , Constant.SENT_TO_MSG);
+        }
+    }
+
+    /**
+     * 设置是否挂断电话
+     * @param hangup
+     */
     public void setHangup(boolean hangup) {
         mPreferences.edit().putBoolean(Constant.CODE_HANGUP , hangup);
+    }
+
+    /**
+     * 获取是否挂断电话
+     */
+    public boolean getHangup() {
+        return mPreferences.getBoolean(Constant.CODE_HANGUP , false);
     }
 }

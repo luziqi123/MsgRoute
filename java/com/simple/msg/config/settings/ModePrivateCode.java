@@ -1,5 +1,7 @@
 package com.simple.msg.config.settings;
 
+import android.text.TextUtils;
+
 import com.simple.msg.util.Constant;
 
 /**
@@ -10,12 +12,14 @@ public class ModePrivateCode extends Code{
 
     @Override
     public void todo(String fromPhone, String msg) {
-        if (!msg.contains("-"))return;
-        String[] split = msg.split("-");
-        if (split == null || split.length != 2)return;
-        String mode = split[1];
-        if (mode.equals(Constant.SENT_TO_EMAIL)){
-        }else{
+        if (msg == null || !msg.contains("-"))return;
+        String mode = msg.replace(getCode()  , "");
+        if (!TextUtils.isEmpty(mode)) {
+            if (mode.equals(Constant.SENT_TO_EMAIL)) {
+                mNote.setModePrivate(fromPhone , Constant.SENT_TO_EMAIL);
+            }else{
+                mNote.setModePrivate(fromPhone , Constant.SENT_TO_MSG);
+            }
         }
     }
 
