@@ -1,7 +1,6 @@
 package com.simple.msg.sender;
 
 import com.simple.msg.User;
-import com.simple.msg.config.ConfigManager;
 import com.simple.msg.util.Constant;
 
 import java.util.List;

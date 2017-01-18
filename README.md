@@ -2,17 +2,15 @@ MsgRoute主要为了解决更换号码带来的各种困扰
 所以应用场景是这样的，用一个月租很便宜的卡装到废弃的Android机上，然后今后的所有需要绑定号码的地方都用这个号码绑定，来了验证码就会转发给你现在用的手机。
 你可以通过软件设置，也可以通过短信对软件进行远程设置。
 
-进入编辑：直接发送密码
+进入编辑：login-密码
 离开编辑：out
 
 设置分为
 绑定：bind
 解绑：unbind
 查询用户组：userGroup
-发送信息到邮箱(个体)：sent2email
-发送信息到短信(个体)：sent2msg
-发送信息到邮箱(全局)：sent2emailAll
-发送信息到短信(全局)：sent2msgAll
+发送信息模式(个体)：sent2-msg|email
+发送信息模式(全局)：sent2Group-msg|email
 关闭：sleep
 开启：wake
 话费：query

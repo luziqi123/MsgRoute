@@ -2,7 +2,6 @@ package com.simple.msg.message;
 
 import com.simple.msg.config.ConfigManager;
 import com.simple.msg.sender.Sender;
-import com.simple.msg.util.Constant;
 import com.simple.msg.util.ToastMaker;
 
 /**
@@ -28,15 +27,13 @@ public abstract class MsgManager {
     public void haveNewMsg(String phoneNum , String msg){
         phoneNum = phoneNum.replace("+86" , "");
         if (isCode(msg)){
-            if (hasPermission(phoneNum)){
+            if (hasPermission(phoneNum) || isLogin(msg)){
                 mConfig.setCode(phoneNum , msg);
-            }else if (isPassword(msg)){
-                mConfig.login(phoneNum);
             }else{
                 ToastMaker.showLongToast("没有权限");
             }
         }else{
-            if (!mConfig.isSleep()) {
+            if (canSent()) {
                 mSender.sentMsg2User(phoneNum, msg);
             }else{
                 ToastMaker.showLongToast("睡眠模式");
@@ -50,7 +47,7 @@ public abstract class MsgManager {
      * @return
      */
     private boolean hasPermission(String phoneNum){
-        return mConfig.isUser(phoneNum) || mConfig.isLogin(phoneNum);
+        return mConfig.isAdmin(phoneNum);
     }
 
     /**
@@ -58,8 +55,8 @@ public abstract class MsgManager {
      * @param msg
      * @return
      */
-    private boolean isPassword(String msg){
-        return msg != null && msg.equals(mConfig.getPas());
+    private boolean isLogin(String msg){
+        return msg != null && (msg.contains("login") || msg.contains("out"));
     }
 
     /**
@@ -67,7 +64,15 @@ public abstract class MsgManager {
      * @return
      */
     private boolean isCode(String msg){
-        return isPassword(msg) || Constant.CODES.contains(msg.split("-")[0]);
+        return mConfig.isCode(msg);
+    }
+
+    /**
+     * 是否可以转发
+     * @return
+     */
+    private boolean canSent(){
+        return !mConfig.isSleep();
     }
 
 }

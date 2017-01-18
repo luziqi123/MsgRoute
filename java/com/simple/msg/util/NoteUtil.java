@@ -35,57 +35,44 @@ public class NoteUtil {
     }
 
     /**
-     * 这个号码是不是用户
-     *
-     * @param num
-     * @return
+     * 获取所有用户的字符串
+     * @return 用户名组成的字符串
      */
-    public boolean isUser(String num) {
-        String u = mPreferences.getString("users", "");
-        return u.contains(num);
+    public String getUserStr() {
+        return mPreferences.getString("users", "");
     }
 
     /**
-     * 是否是登录账户
-     *
-     * @param num
-     * @return
+     * 获取白名单用户
+     * @return 白名单用户拼成的字符串
      */
-    public boolean isLogin(String num) {
-        return loginUsers.contains(num);
+    public String getWhiteUser() {
+        return loginUsers;
     }
 
     /**
-     * 登录
-     *
+     * 添加至白名单
      * @param num
      */
-    public void login(String num) {
-        if (isLogin(num)) return;
+    public void addUserToWhite(String num) {
         loginUsers += num;
     }
 
     /**
-     * 退出
-     *
+     * 从白名单移除
      * @param num
      */
-    public static void sigOut(String num) {
+    public void removeUserToWhite(String num) {
         loginUsers = loginUsers.replace(num, "");
     }
 
     /**
      * 设置密码
-     *
      * @param oldPas
      * @param nowPas
      */
-    public void setPas(String oldPas, String nowPas) {
-        if (getPas().equals("--") || getPas().equals(oldPas)) {
-            mPreferences.edit().putString("pas", nowPas);
-        } else {
-            ToastMaker.showLongToast("旧密码错误");
-        }
+    public void setPassword(String oldPas, String nowPas) {
+        mPreferences.edit().putString("pas", nowPas).apply();
     }
 
     /**
@@ -93,7 +80,7 @@ public class NoteUtil {
      *
      * @return
      */
-    public String getPas() {
+    public String getPassword() {
         return mPreferences.getString("pas", "--");
     }
 
@@ -106,7 +93,7 @@ public class NoteUtil {
         if (!isUpdate) return userList;
         isUpdate = false;
         userList.clear();
-        String u = mPreferences.getString("users", "");
+        String u = getUserStr();
         String[] split = u.split("-");
         for (int i = 0; i < split.length; i++) {
             userList.add(new User(split[i]));
@@ -122,7 +109,7 @@ public class NoteUtil {
      * @return
      */
     public void deleUser(String num) {
-        String u = mPreferences.getString("users", "");
+        String u = getUserStr();
         if (!u.contains(num)) return;
         isUpdate = true;
         List<User> userGroup = getUserGroup();
