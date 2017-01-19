@@ -32,11 +32,12 @@ public class Sender {
      */
     public void  sentAll(String fromNum , String msg){
         List<User> users = ConfigManager.getInstance().getUserList();
+        if (users == null)return;
         for (User user : users) {
             if (user.sendMode.equals(Constant.SENT_TO_EMAIL)){
                 mSendEmail.sent(fromNum , msg);
             }else{
-                mSendMsg.sent(fromNum , msg);
+                mSendMsg.sent(user.phoneNum , fromNum , msg);
             }
         }
     }
@@ -46,11 +47,10 @@ public class Sender {
      */
     public void  sentTo(String toPhone , String fromNum , String msg){
         User user = ConfigManager.getInstance().getUser(toPhone);
-        if (user == null)return;
-        if (user.sendMode.equals(Constant.SENT_TO_EMAIL)){
-            mSendEmail.sent(fromNum , msg);
+        if (user == null || user.sendMode.equals(Constant.SENT_TO_EMAIL)){
+            mSendEmail.sent(toPhone , msg);
         }else{
-            mSendMsg.sent(fromNum , msg);
+            mSendMsg.sent(toPhone , fromNum , msg);
         }
     }
 }

@@ -122,6 +122,19 @@ public class NoteUtil {
     }
 
     /**
+     * 根据手机号码获取用户
+     * @param phone
+     * @return
+     */
+    public User getUser(String phone) {
+        for (User user : getUserGroup()) {
+            if (user.phoneNum.equals(phone))
+                return user;
+        }
+        return null;
+    }
+
+    /**
      * 添加用户
      *
      * @param num
@@ -223,4 +236,5 @@ public class NoteUtil {
     public boolean getHangup() {
         return mPreferences.getBoolean(Constant.CODE_HANGUP , false);
     }
+
 }

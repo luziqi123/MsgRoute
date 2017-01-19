@@ -2,6 +2,7 @@ package com.simple.msg.message;
 
 import com.simple.msg.config.ConfigManager;
 import com.simple.msg.sender.Sender;
+import com.simple.msg.util.Constant;
 import com.simple.msg.util.ToastMaker;
 
 /**
@@ -56,7 +57,7 @@ public abstract class MsgManager {
      * @return
      */
     private boolean isLogin(String msg){
-        return msg != null && (msg.contains("login") || msg.contains("out"));
+        return msg != null && (msg.contains(Constant.CODE_LOGIN) || msg.contains(Constant.CODE_OUT));
     }
 
     /**

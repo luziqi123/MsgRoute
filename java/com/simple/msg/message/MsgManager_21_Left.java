@@ -3,6 +3,7 @@ package com.simple.msg.message;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Handler;
+import android.provider.Telephony;
 
 import com.simple.msg.sys.SmsObserver;
 
@@ -16,8 +17,6 @@ public class MsgManager_21_Left extends MsgManager {
 
     private SmsObserver smsObserver;
 
-    private Uri SMS_INBOX = Uri.parse("content://sms/");
-
     public MsgManager_21_Left(Context context){
         mContext = context;
     }
@@ -25,7 +24,7 @@ public class MsgManager_21_Left extends MsgManager {
     @Override
     public void init() {
         smsObserver = new SmsObserver(this, mContext, new Handler());
-        mContext.getContentResolver().registerContentObserver(SMS_INBOX, true,
+        mContext.getContentResolver().registerContentObserver(Telephony.Sms.CONTENT_URI, true,
                 smsObserver);
     }
 

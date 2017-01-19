@@ -87,7 +87,7 @@ public class ConfigManager implements IConfig{
 
     @Override
     public boolean isAdmin(String num) {
-        return false;
+        return mNote.getUserStr().contains(num);
     }
 
     @Override
@@ -123,7 +123,7 @@ public class ConfigManager implements IConfig{
 
     @Override
     public User getUser(String phone) {
-        return getUser(phone);
+        return mNote.getUser(phone);
     }
 
     @Override

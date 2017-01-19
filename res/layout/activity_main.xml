@@ -6,6 +6,12 @@
     android:gravity="center"
     tools:context="com.simple.msg.MainActivity">
 
+    <ListView
+        android:id="@+id/users"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,7 +21,6 @@
         android:id="@+id/add"
         android:text="add"
         android:layout_marginTop="10dp"
-        android:onClick="add"
         android:layout_width="match_parent"
         android:layout_height="40dp" />
 </LinearLayout>

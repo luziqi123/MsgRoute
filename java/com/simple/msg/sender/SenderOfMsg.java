@@ -8,8 +8,23 @@ import android.telephony.SmsManager;
  */
 public class SenderOfMsg {
 
-    public void sent(String phoneNum, String msg) {
+    public void sent(String phoneNum, String fromNum , String msg) {
         SmsManager sms = SmsManager.getDefault();
-        sms.sendTextMessage(phoneNum, null, msg, null, null);
+        msg = fromNum + ":\n" + msg;
+        if (msg.length() > 70) {
+//            ArrayList<String> msgs = sms.divideMessage(msg);
+//            ArrayList<PendingIntent> sentIntents = new ArrayList<PendingIntent>();
+//            Intent sentIntent = new Intent(SENT_SMS_ACTION);
+//            PendingIntent sentPI = PendingIntent.getBroadcast(this, 0, sentIntent, 0);
+//
+//            Intent deliverIntent = new Intent(DELIVERED_SMS_ACTION);
+//            PendingIntent deliverPI = PendingIntent.getBroadcast(this, 0, deliverIntent, 0);
+//            for(int i = 0;i<msgs.size();i++){
+//                sentIntents.add(sentPI);
+//            }
+//            sms.sendMultipartTextMessage(phoneNum, null, msgs, sentIntents, null);
+        } else {
+            sms.sendTextMessage(phoneNum, null, msg, null, null);
+        }
     }
 }

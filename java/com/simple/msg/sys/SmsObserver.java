@@ -1,20 +1,26 @@
 package com.simple.msg.sys;
 
+import android.annotation.TargetApi;
+import android.content.ContentProvider;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Handler;
+import android.provider.Telephony;
+import android.telephony.SmsMessage;
+import android.util.Log;
 
 import com.simple.msg.message.MsgManager;
+
+import java.util.concurrent.RecursiveTask;
 
 /**
  * 监听短信数据库发生变化的内容提供者
  * Created by Administrator on 2017/1/16.
  */
 public class SmsObserver extends android.database.ContentObserver {
-
-    private Uri SMS_INBOX = Uri.parse("content://sms/");
 
     private Context context;
 
@@ -27,22 +33,27 @@ public class SmsObserver extends android.database.ContentObserver {
     }
 
     @Override
-    public void onChange(boolean selfChange) {
-        super.onChange(selfChange);
+    public void onChange(boolean selfChange, Uri uri) {
+        super.onChange(selfChange, uri);
+        // 第一遍 先执行content://sms/raw 第二遍则 uri.toString :content://sms/inbox
+        // 如果没有这个判断则会走两遍onChange方法
+        if ("content://sms/raw".equals(uri.toString())) return;
         ContentResolver cr = context.getContentResolver();
-        String[] projection = new String[] { "_id", "address", "body" , "person" };
-        Cursor cur = cr.query(SMS_INBOX, projection, null, null, "date desc");
+        String[] projection = new String[] {
+                Telephony.Sms.ADDRESS,
+                Telephony.Sms.TYPE,
+                Telephony.Sms.BODY};
+        Cursor cur = cr.query(Telephony.Sms.CONTENT_URI , projection, null, null, Telephony.Sms.DEFAULT_SORT_ORDER);
         if (null == cur)
             return;
         if (cur.moveToFirst()) {
-            String number = cur.getString(cur.getColumnIndex("address"));//手机号
-            String name = cur.getString(cur.getColumnIndex("person"));//联系人姓名列表
-            String body = cur.getString(cur.getColumnIndex("body"));
-            mManager.haveNewMsg(name , body);
+            int type = cur.getInt(cur.getColumnIndex(Telephony.Sms.TYPE));// 类型
+            if (type == 2)return;// 1是收到的  2是发出的
+            String number = cur.getString(cur.getColumnIndex(Telephony.Sms.ADDRESS));// 手机号
+            String body = cur.getString(cur.getColumnIndex(Telephony.Sms.BODY)); // 短信内容
+            mManager.haveNewMsg(number , body);
         }
         cur.close();
-
     }
-
 }
 

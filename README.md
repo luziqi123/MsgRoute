@@ -35,3 +35,11 @@ MsgRoute主要为了解决更换号码带来的各种困扰
 更换号码：update+密码
 
 需要进入APP设置，将询问的权限改为允许
+
+
+
+------------------------
+关于短信的常量都在这个类里面
+Telephony.Sms
+[不要被他误导，字段总结全了，但是字段名称不对](http://blog.csdn.net/actual_/article/details/7967385)
+[这个挺全](http://blog.csdn.net/mldxs/article/details/20214729)
