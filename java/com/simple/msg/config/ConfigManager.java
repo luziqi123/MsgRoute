@@ -17,7 +17,6 @@ import com.simple.msg.config.settings.UnbindCode;
 import com.simple.msg.config.settings.UnhangupCode;
 import com.simple.msg.config.settings.UsersCode;
 import com.simple.msg.config.settings.WakeCode;
-import com.simple.msg.sender.Sender;
 import com.simple.msg.util.Constant;
 import com.simple.msg.util.NoteUtil;
 
@@ -30,26 +29,26 @@ import java.util.List;
  */
 public class ConfigManager implements IConfig{
 
-    private HashMap<String , Code> mSettingList;
+    private HashMap<String , Class<? extends Code>> mSettingList;
 
     private NoteUtil mNote = NoteUtil.getInstance();
 
     private static ConfigManager instance = new ConfigManager();
     private ConfigManager(){
         mSettingList = new HashMap<>();
-        mSettingList.put(Constant.CODE_LOGIN , new LoginCode());
-        mSettingList.put(Constant.CODE_OUT , new OutCode());
-        mSettingList.put(Constant.CODE_BIND , new BindCode());
-        mSettingList.put(Constant.CODE_UNBIND , new UnbindCode());
-        mSettingList.put(Constant.CODE_USERS , new UsersCode());
-        mSettingList.put(Constant.CODE_MODE_PRIVATE , new ModePrivateCode());
-        mSettingList.put(Constant.CODE_MODE_PUBLIC , new ModePublicCode());
-        mSettingList.put(Constant.CODE_SLEEP , new SleepCode());
-        mSettingList.put(Constant.CODE_WAKE , new WakeCode());
-        mSettingList.put(Constant.CODE_QUERY , new QueryCode());
-        mSettingList.put(Constant.CODE_HANGUP , new HangupCode());
-        mSettingList.put(Constant.CODE_HANGUP_NOT , new UnhangupCode());
-        mSettingList.put(Constant.CODE_HELP , new HelpCode());
+        mSettingList.put(Constant.CODE_LOGIN , LoginCode.class);
+        mSettingList.put(Constant.CODE_OUT , OutCode.class);
+        mSettingList.put(Constant.CODE_BIND , BindCode.class);
+        mSettingList.put(Constant.CODE_UNBIND , UnbindCode.class);
+        mSettingList.put(Constant.CODE_USERS , UsersCode.class);
+        mSettingList.put(Constant.CODE_MODE_PRIVATE , ModePrivateCode.class);
+        mSettingList.put(Constant.CODE_MODE_PUBLIC , ModePublicCode.class);
+        mSettingList.put(Constant.CODE_SLEEP , SleepCode.class);
+        mSettingList.put(Constant.CODE_WAKE , WakeCode.class);
+        mSettingList.put(Constant.CODE_QUERY , QueryCode.class);
+        mSettingList.put(Constant.CODE_HANGUP , HangupCode.class);
+        mSettingList.put(Constant.CODE_HANGUP_NOT , UnhangupCode.class);
+        mSettingList.put(Constant.CODE_HELP , HelpCode.class);
     }
     public static ConfigManager getInstance(){
         return instance;
@@ -57,10 +56,17 @@ public class ConfigManager implements IConfig{
 
     @Override
     public void setCode(String num, String msg) {
-        if (TextUtils.isEmpty(num) || TextUtils.isEmpty(msg))return;
-        if (isCode(msg)) {
-            String code = getCode(msg);
-            mSettingList.get(code).todo(num , msg);
+        try {
+            if (TextUtils.isEmpty(num) || TextUtils.isEmpty(msg))return;
+            if (isCode(msg)) {
+                String code = getCode(msg);
+                Class<? extends Code> codeClass = mSettingList.get(code);
+                codeClass.newInstance().todo(num, msg);
+            }
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
         }
     }
 
@@ -69,7 +75,7 @@ public class ConfigManager implements IConfig{
         if (msg.contains("-")){
             String[] split = msg.split("-");
             if (split != null && split.length > 0){
-                code = split[0].trim();
+                code = split[0].trim() + "-";
             }else{
                 code = "null";
             }

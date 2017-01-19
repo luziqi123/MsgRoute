@@ -35,6 +35,7 @@ public class Constant {
      * 所有命令
      */
     public static String CODES =
+                    "login- " +
                     "out " + // 退出登录
                     "bind " + // 绑定
                     "unbind " + // 解绑

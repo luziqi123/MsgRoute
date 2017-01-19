@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 
+import com.simple.msg.config.ConfigManager;
 import com.simple.msg.message.MsgFactory;
 import com.simple.msg.message.MsgManager;
 
@@ -18,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
 
         mMsgManager = MsgFactory.getMsgManager(this);
         mMsgManager.init();
+
+        ConfigManager.getInstance().setCode("11111111" , "login-123123");
     }
 
     public void add(View view){
