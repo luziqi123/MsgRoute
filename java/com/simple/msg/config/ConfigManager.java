@@ -18,7 +18,6 @@ import com.simple.msg.config.settings.UnhangupCode;
 import com.simple.msg.config.settings.UsersCode;
 import com.simple.msg.config.settings.WakeCode;
 import com.simple.msg.util.Constant;
-import com.simple.msg.util.NoteUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -31,7 +30,7 @@ public class ConfigManager implements IConfig{
 
     private HashMap<String , Class<? extends Code>> mSettingList;
 
-    private NoteUtil mNote = NoteUtil.getInstance();
+    private Note mNote = Note.getInstance();
 
     private static ConfigManager instance = new ConfigManager();
     private ConfigManager(){

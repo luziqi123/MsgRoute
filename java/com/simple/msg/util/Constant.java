@@ -7,6 +7,11 @@ package com.simple.msg.util;
 public class Constant {
 
     /**
+     * 是否是Debug模式
+     */
+    public static boolean isDebug = true;
+
+    /**
      * 收到信息通过短信方式转发
      */
     public static String SENT_TO_MSG = "SentToMsg";

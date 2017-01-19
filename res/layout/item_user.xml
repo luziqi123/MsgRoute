@@ -4,39 +4,24 @@
     android:layout_height="150dp"
     android:layout_marginLeft="20dp"
     android:layout_marginRight="20dp"
+    android:background="@drawable/back_item"
     android:gravity="center"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/textColor"
-        style="@style/TextAppearance.AppCompat.Subhead"
-        android:text="用户名"/>
+        style="@style/TextItem" />
+
     <TextView
         android:id="@+id/num"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/textColor"
-        style="@style/TextAppearance.AppCompat.Body1"
-        android:layout_marginTop="6dp"
-        android:text="号码"/>
+        style="@style/TextItem" />
+
     <TextView
         android:id="@+id/email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/textColor"
-        style="@style/TextAppearance.AppCompat.Body2"
-        android:layout_marginTop="6dp"
-        android:text="邮箱"/>
+        style="@style/TextItem" />
+
     <TextView
         android:id="@+id/status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/textColor"
-        android:layout_marginTop="6dp"
-        style="@style/TextAppearance.AppCompat.Body2"
-        android:text="状态"/>
+        style="@style/TextItem" />
 
 </LinearLayout>

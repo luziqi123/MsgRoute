@@ -1,7 +1,6 @@
 package com.simple.msg.config.settings;
 
 import com.simple.msg.util.Constant;
-import com.simple.msg.util.NoteUtil;
 
 /**
  * 取消绑定

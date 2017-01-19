@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.simple.msg.message.MsgFactory;
 import com.simple.msg.message.MsgManager;
 import com.simple.msg.util.Constant;
-import com.simple.msg.util.NoteUtil;
+import com.simple.msg.config.Note;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initDate() {
-        List<User> userGroup = NoteUtil.getInstance().getUserGroup();
+        List<User> userGroup = Note.getInstance().getUserGroup();
         list.clear();
         list.addAll(userGroup);
         adapter.notifyDataSetChanged();
@@ -58,8 +58,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String s = numEdit.getText().toString();
-                NoteUtil.getInstance().addUser(s, "luziqi123@gmail.com", Constant.SENT_TO_MSG);
-                List<User> userGroup = NoteUtil.getInstance().getUserGroup();
+                Note.getInstance().addUser(s, "luziqi123@gmail.com", Constant.SENT_TO_MSG);
+                List<User> userGroup = Note.getInstance().getUserGroup();
                 list.clear();
                 list.addAll(userGroup);
                 adapter.notifyDataSetChanged();

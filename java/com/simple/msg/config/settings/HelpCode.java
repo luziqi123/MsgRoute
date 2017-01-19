@@ -29,7 +29,7 @@ public class HelpCode extends Code{
 //                "命令查询：help\n" +
 //                "发送信息到指定号码：sent-号码 内容\n" +
 //                "注：个体设置高于全局设置,默认全部为短信发送.";
-        String help = "help你妹，正在转接110...";
+        String help = "怎么help你？用左手还是黄瓜？";
         mSender.sentTo(fromPhone , "MsgRoute" , help);
     }
 

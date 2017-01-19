@@ -3,7 +3,6 @@ package com.simple.msg.config.settings;
 import android.text.TextUtils;
 
 import com.simple.msg.util.Constant;
-import com.simple.msg.util.NoteUtil;
 
 /**
  * 退出命令

@@ -1,6 +1,6 @@
 package com.simple.msg.config.settings;
 
-import com.simple.msg.util.NoteUtil;
+import com.simple.msg.config.Note;
 
 /**
  * 每一个被设置项的抽象类
@@ -15,7 +15,7 @@ import com.simple.msg.util.NoteUtil;
  */
 public abstract class Code{
 
-    protected NoteUtil mNote = NoteUtil.getInstance();
+    protected Note mNote = Note.getInstance();
 
     /**
      * 这个命令被调用的时候需要做什么操作

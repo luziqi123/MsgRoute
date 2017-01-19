@@ -1,10 +1,12 @@
-package com.simple.msg.util;
+package com.simple.msg.config;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
 
 import com.simple.msg.User;
+import com.simple.msg.util.Constant;
+import com.simple.msg.util.ToastMaker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +16,7 @@ import java.util.regex.Pattern;
 /**
  * Created by Administrator on 2017/1/16.
  */
-public class NoteUtil {
+public class Note {
 
     private static SharedPreferences mPreferences;
 
@@ -24,9 +26,9 @@ public class NoteUtil {
 
     public static String loginUsers = "";
 
-    private static NoteUtil instance = new NoteUtil();
-    private NoteUtil(){}
-    public static NoteUtil getInstance(){
+    private static Note instance = new Note();
+    private Note(){}
+    public static Note getInstance(){
         return instance;
     }
 
