@@ -13,6 +13,7 @@ import android.telephony.SmsMessage;
 import android.util.Log;
 
 import com.simple.msg.message.MsgManager;
+import com.simple.msg.util.Constant;
 
 import java.util.concurrent.RecursiveTask;
 
@@ -40,17 +41,17 @@ public class SmsObserver extends android.database.ContentObserver {
         if ("content://sms/raw".equals(uri.toString())) return;
         ContentResolver cr = context.getContentResolver();
         String[] projection = new String[] {
-                Telephony.Sms.ADDRESS,
-                Telephony.Sms.TYPE,
-                Telephony.Sms.BODY};
-        Cursor cur = cr.query(Telephony.Sms.CONTENT_URI , projection, null, null, Telephony.Sms.DEFAULT_SORT_ORDER);
+                Constant.ADDRESS,
+                Constant.TYPE,
+                Constant.BODY};
+        Cursor cur = cr.query(Constant.CONTENT_URI , projection, null, null, Constant.DEFAULT_SORT_ORDER);
         if (null == cur)
             return;
         if (cur.moveToFirst()) {
-            int type = cur.getInt(cur.getColumnIndex(Telephony.Sms.TYPE));// 类型
+            int type = cur.getInt(cur.getColumnIndex(Constant.TYPE));// 类型
             if (type == 2)return;// 1是收到的  2是发出的
-            String number = cur.getString(cur.getColumnIndex(Telephony.Sms.ADDRESS));// 手机号
-            String body = cur.getString(cur.getColumnIndex(Telephony.Sms.BODY)); // 短信内容
+            String number = cur.getString(cur.getColumnIndex(Constant.ADDRESS));// 手机号
+            String body = cur.getString(cur.getColumnIndex(Constant.BODY)); // 短信内容
             mManager.haveNewMsg(number , body);
         }
         cur.close();
