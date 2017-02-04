@@ -1,5 +1,8 @@
 package com.simple.msg;
 
+import android.app.Notification;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -15,9 +18,14 @@ import com.simple.msg.message.MsgFactory;
 import com.simple.msg.message.MsgManager;
 import com.simple.msg.util.Constant;
 import com.simple.msg.config.Note;
+import com.simple.msg.util.email_sent.EmailSent;
+import com.simple.msg.util.email_sent.SimpleMailSender;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
+
+import javax.mail.MessagingException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,12 +41,34 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mMsgManager = MsgFactory.getMsgManager(this);
-        mMsgManager.init();
+//        mMsgManager = MsgFactory.getMsgManager(this);
+//        mMsgManager.init();
+//
+//        initView();
+//
+//        initDate();
 
-        initView();
 
-        initDate();
+//        SimpleMailSender serviceSms = new SimpleMailSender("runningmaggot@163.com",
+//                "luziqi123");
+//        try {
+//            serviceSms.send("317190880@qq.com" , "短信提醒" , "aaaaaaaaaaaa");
+//        } catch (MessagingException e) {
+//            e.printStackTrace();
+//        }
+
+//---------------------
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                EmailSent se = new EmailSent();
+                try {
+                    se.doSendHtmlEmail("会议通知", "今天晚上8点全体成员在一楼开会", "317190770@qq.com");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
 
     }
 

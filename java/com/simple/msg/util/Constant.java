@@ -1,10 +1,37 @@
 package com.simple.msg.util;
 
+import android.net.Uri;
+
 /**
  * 常量
  * Created by Administrator on 2017/1/17.
  */
 public class Constant {
+
+    public static Uri CONTENT_URI = Uri.parse("content://sms");
+
+    /**
+     * The address of the other party.
+     * <P>Type: TEXT</P>
+     */
+    public static final String ADDRESS = "address";
+
+    /**
+     * The type of message.
+     * <P>Type: INTEGER</P>
+     */
+    public static final String TYPE = "type";
+
+    /**
+     * The body of the message.
+     * <P>Type: TEXT</P>
+     */
+    public static final String BODY = "body";
+
+    /**
+     * The default sort order for this table.
+     */
+    public static final String DEFAULT_SORT_ORDER = "date DESC";
 
     /**
      * 是否是Debug模式

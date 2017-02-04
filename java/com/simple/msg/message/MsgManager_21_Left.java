@@ -1,11 +1,10 @@
 package com.simple.msg.message;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Handler;
-import android.provider.Telephony;
 
 import com.simple.msg.sys.SmsObserver;
+import com.simple.msg.util.Constant;
 
 /**
  * 5.0以下的信息管理器
@@ -24,7 +23,7 @@ public class MsgManager_21_Left extends MsgManager {
     @Override
     public void init() {
         smsObserver = new SmsObserver(this, mContext, new Handler());
-        mContext.getContentResolver().registerContentObserver(Telephony.Sms.CONTENT_URI, true,
+        mContext.getContentResolver().registerContentObserver(Constant.CONTENT_URI, true,
                 smsObserver);
     }
 
