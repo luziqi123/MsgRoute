@@ -73,7 +73,7 @@ public class ConfigManager implements IConfig{
         String code;
         if (msg.contains("-")){
             String[] split = msg.split("-");
-            if (split != null && split.length > 0){
+            if (split.length > 0){
                 code = split[0].trim() + "-";
             }else{
                 code = "null";
@@ -94,7 +94,7 @@ public class ConfigManager implements IConfig{
         String code;
         if (msg.contains("-")){
             String[] split = msg.split("-");
-            if (split != null && split.length > 0){
+            if (split.length > 0){
                 code = split[0];
             }else{
                 code = "null";
