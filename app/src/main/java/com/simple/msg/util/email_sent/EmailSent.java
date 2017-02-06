@@ -22,17 +22,16 @@ import javax.mail.internet.MimeMessage;
  * Created by Administrator on 2017/1/20.
  */
 public class EmailSent {
-
     // 设置服务器
-    private static String KEY_SMTP = "mail.pop.host";
-    private static String VALUE_SMTP = "pop.qq.com";
+    private static String KEY_SMTP = "mail.smtp.host";
+    private static String VALUE_SMTP = "smtp.163.com";
     // 服务器验证
-    private static String KEY_PROPS = "mail.pop.auth";
+    private static String KEY_PROPS = "mail.smtp.auth";
     private static boolean VALUE_PROPS = true;
     // 发件人用户名、密码
-    private String SEND_USER = "317190770@qq.com";
-    private String SEND_PWD = "hbpildedneakbjff";
-//    private String SEND_PWD = "ngveuiyxekiabifd";
+    private String SEND_USER = "runningmaggot@163.com";
+    private String SEND_UNAME = "runningmaggot@163.com";
+    private String SEND_PWD = "luziqi123789";
     // 建立会话
     private MimeMessage message;
     private Session s;
@@ -43,10 +42,11 @@ public class EmailSent {
     public EmailSent() {
         Properties props = System.getProperties();
         props.setProperty(KEY_SMTP, VALUE_SMTP);
-        props.setProperty(KEY_PROPS, "true");
+        props.put(KEY_PROPS, "true");
+        //props.put("mail.smtp.auth", "true");
         s =  Session.getDefaultInstance(props, new Authenticator(){
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(SEND_USER, SEND_PWD);
+                return new PasswordAuthentication(SEND_UNAME, SEND_PWD);
             }});
         s.setDebug(true);
         message = new MimeMessage(s);
@@ -75,11 +75,11 @@ public class EmailSent {
             message.setSubject(headName);
             String content = sendHtml.toString();
             // 邮件内容,也可以使纯文本"text/plain"
-            message.setContent(content, "text/html;charset=UTF-8");
+            message.setContent(content, "text/html;charset=GBK");
             message.saveChanges();
-            Transport transport = s.getTransport("pop3");
+            Transport transport = s.getTransport("smtp");
             // smtp验证，就是你用来发邮件的邮箱用户名密码
-            transport.connect(VALUE_SMTP, SEND_USER, SEND_PWD);
+            transport.connect(VALUE_SMTP, SEND_UNAME, SEND_PWD);
             // 发送
             transport.sendMessage(message, message.getAllRecipients());
             transport.close();

@@ -62,9 +62,9 @@ public class MainActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                EmailSent2 se = new EmailSent2();
                 try {
-                    se.doSendHtmlEmail("验证码通知", "您的登录验证码为020304，千万不要告诉别人", "1664222121@qq.com");
+                    EmailSent2.sendEmail("1664222121@qq.com", "你好，很高兴认识你！","周三下午开个会吧~" );
+//                    new EmailSent().doSendHtmlEmail("sdgdfg" , "防守打法阿达士大夫" , "1664222121@qq.com");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

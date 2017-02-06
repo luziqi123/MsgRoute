@@ -69,6 +69,7 @@ Telephony.Sms
 - 在string中写好文案
 - 使项目可以在测试和正式状态之间切换
 - 搭建初期，我决定用Fragment来写所有界面。其实也不是真的想用fragment，而是不想用传统的跳转模式。
+- 修改.gitignore忽略文件
 
 ---
 
@@ -103,6 +104,17 @@ Telephony.Sms
 - 界面如何搭建？
 - 邮件如何发送？
 
+邮件可以使用javax提供的库来发送,他们分别是:
+
+    compile files('libs/mail.jar')
+    compile files('libs/activation.jar')
+    compile files('libs/additionnal.jar')
+
 -----------------------
 
 #优化
+
+
+
+163邮箱 OK
+12306  
