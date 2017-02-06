@@ -1,11 +1,6 @@
 package com.simple.msg.util.email_sent;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
-import java.util.Date;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -21,14 +16,10 @@ import javax.mail.internet.MimeMessage;
 /**
  * Created by Administrator on 2017/1/20.
  */
-public class EmailSent {
+public class EmailSent2 {
 
     // 设置服务器
-    private static String KEY_SMTP = "mail.pop.host";
-    private static String VALUE_SMTP = "pop.qq.com";
-    // 服务器验证
-    private static String KEY_PROPS = "mail.pop.auth";
-    private static boolean VALUE_PROPS = true;
+    private static String MAIL_HOST = "smtp.qq.com";
     // 发件人用户名、密码
     private String SEND_USER = "317190770@qq.com";
     private String SEND_PWD = "hbpildedneakbjff";
@@ -38,16 +29,18 @@ public class EmailSent {
     private Session s;
 
     /*
-     * 初始化方法
+     * 配置邮箱
      */
-    public EmailSent() {
-        Properties props = System.getProperties();
-        props.setProperty(KEY_SMTP, VALUE_SMTP);
-        props.setProperty(KEY_PROPS, "true");
-        s =  Session.getDefaultInstance(props, new Authenticator(){
+    public EmailSent2() {
+        Properties props = new Properties();
+        props.setProperty("mail.transport.protocol", "smtp");   // 使用的协议（JavaMail规范要求）
+        props.setProperty("mail.host", MAIL_HOST);        // 发件人的邮箱的 SMTP 服务器地址
+        props.setProperty("mail.smtp.auth", "true");
+        s =  Session.getDefaultInstance(props, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(SEND_USER, SEND_PWD);
-            }});
+            }
+        });
         s.setDebug(true);
         message = new MimeMessage(s);
     }
@@ -66,7 +59,7 @@ public class EmailSent {
                                 String receiveUser) {
         try {
             // 发件人
-            InternetAddress from = new InternetAddress(SEND_USER);
+            InternetAddress from = new InternetAddress(SEND_USER ,"MesRoute短信路由" , "UTF-8");
             message.setFrom(from);
             // 收件人
             InternetAddress to = new InternetAddress(receiveUser);
@@ -77,17 +70,15 @@ public class EmailSent {
             // 邮件内容,也可以使纯文本"text/plain"
             message.setContent(content, "text/html;charset=UTF-8");
             message.saveChanges();
-            Transport transport = s.getTransport("pop3");
+            Transport transport = s.getTransport("smtp");
             // smtp验证，就是你用来发邮件的邮箱用户名密码
-            transport.connect(VALUE_SMTP, SEND_USER, SEND_PWD);
+            transport.connect(SEND_USER, SEND_PWD);
             // 发送
             transport.sendMessage(message, message.getAllRecipients());
             transport.close();
             System.out.println("send success!");
-        } catch (AddressException e) {
+        } catch (UnsupportedEncodingException | MessagingException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (MessagingException e) {
             e.printStackTrace();
         }
     }

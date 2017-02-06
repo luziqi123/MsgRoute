@@ -19,6 +19,7 @@ import com.simple.msg.message.MsgManager;
 import com.simple.msg.util.Constant;
 import com.simple.msg.config.Note;
 import com.simple.msg.util.email_sent.EmailSent;
+import com.simple.msg.util.email_sent.EmailSent2;
 import com.simple.msg.util.email_sent.SimpleMailSender;
 
 import java.util.ArrayList;
@@ -61,9 +62,9 @@ public class MainActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                EmailSent se = new EmailSent();
+                EmailSent2 se = new EmailSent2();
                 try {
-                    se.doSendHtmlEmail("会议通知", "今天晚上8点全体成员在一楼开会", "317190770@qq.com");
+                    se.doSendHtmlEmail("验证码通知", "您的登录验证码为020304，千万不要告诉别人", "1664222121@qq.com");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
