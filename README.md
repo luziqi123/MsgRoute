@@ -10,19 +10,19 @@ MsgRoute主要为了解决更换号码带来的各种困扰
 离开编辑：out
 
 设置分为
-绑定：bind
-解绑：unbind
-查询用户组：userGroup
-发送信息模式(个体)：sent2-msg|email
-发送信息模式(全局)：sent2Group-msg|email
-关闭：sleep
-开启：wake
-话费：query
-来电挂断：hangup
-来电不挂断：dot hangup
-命令查询：help
-发送信息到指定号码：sent-号码 内容
-注：个体设置高于全局设置,默认全部为短信发送.
+- 绑定：bind
+- 解绑：unbind
+- 查询用户组：userGroup
+- 发送信息模式(个体)：sent2-msg|email
+- 发送信息模式(全局)：sent2Group-msg|email
+- 关闭：sleep
+- 开启：wake
+- 话费：query
+- 来电挂断：hangup
+- 来电不挂断：dot hangup
+- 命令查询：help
+- 发送信息到指定号码：sent-号码 内容
+- 注：个体设置高于全局设置,默认全部为短信发送.
 
 一般短信，拦截
 根据设置的发送方式，发送给注册过的手机号或邮箱
@@ -44,8 +44,11 @@ MsgRoute主要为了解决更换号码带来的各种困扰
 
 ------------------------
 关于短信的常量都在这个类里面
+
 Telephony.Sms
+
 [不要被他误导，字段总结全了，但是字段名称不对](http://blog.csdn.net/actual_/article/details/7967385)
+
 [这个挺全](http://blog.csdn.net/mldxs/article/details/20214729)
 
 
