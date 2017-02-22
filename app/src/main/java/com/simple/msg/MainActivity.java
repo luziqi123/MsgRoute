@@ -42,21 +42,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        mMsgManager = MsgFactory.getMsgManager(this);
-//        mMsgManager.init();
-//
-//        initView();
-//
-//        initDate();
+        mMsgManager = MsgFactory.getMsgManager(this);
+        mMsgManager.init();
+
+        initView();
+
+        initDate();
 
 
-//        SimpleMailSender serviceSms = new SimpleMailSender("runningmaggot@163.com",
-//                "luziqi123");
-//        try {
-//            serviceSms.send("317190880@qq.com" , "短信提醒" , "aaaaaaaaaaaa");
-//        } catch (MessagingException e) {
-//            e.printStackTrace();
-//        }
+        SimpleMailSender serviceSms = new SimpleMailSender("runningmaggot@163.com",
+                "luziqi123");
+        try {
+            serviceSms.send("317190880@qq.com" , "短信提醒" , "aaaaaaaaaaaa");
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
 
 //---------------------
         new Thread(new Runnable() {
