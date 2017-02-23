@@ -1,5 +1,8 @@
 package com.simple.msg.sender;
 
+import android.app.Activity;
+import android.content.Intent;
+
 /**
  * 邮箱发送者
  * Created by Administrator on 2017/1/17.
@@ -7,7 +10,7 @@ package com.simple.msg.sender;
 public class SenderOfEmail {
 
     public void sent(String phoneNum, String msg) {
-        // TODO 发送短信至邮箱
+
     }
 
 
