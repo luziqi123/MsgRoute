@@ -1,11 +1,7 @@
 package com.simple.msg;
 
-import android.app.Notification;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,18 +11,14 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.simple.msg.config.Note;
 import com.simple.msg.message.MsgFactory;
 import com.simple.msg.message.MsgManager;
 import com.simple.msg.util.Constant;
-import com.simple.msg.config.Note;
-import com.simple.msg.util.email_sent.EmailSent;
-import com.simple.msg.util.email_sent.EmailSent2;
 import com.simple.msg.util.email_sent.SimpleMailSender;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Properties;
 
 import javax.mail.MessagingException;
 
@@ -44,44 +36,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // TODO temp
-        Test.二分排序();
-//        Log.i("快速排序" , Arrays.toString(Test.arry));
+        mMsgManager = MsgFactory.getMsgManager(this);
+        mMsgManager.init();
+
+        initView();
+
+        initDate();
 
 
-        //有用的代码
-
-//        mMsgManager = MsgFactory.getMsgManager(this);
-//        mMsgManager.init();
-//
-//        initView();
-//
-//        initDate();
-//
-//
-//        SimpleMailSender serviceSms = new SimpleMailSender("runningmaggot@163.com",
-//                "luziqi123");
-//        try {
-//            serviceSms.send("317190880@qq.com" , "短信提醒" , "aaaaaaaaaaaa");
-//        } catch (MessagingException e) {
-//            e.printStackTrace();
-//        }
-
-        // /有用的代码
-//---------------------
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                try {
-//                    EmailSent2.sendEmail("1664222121@qq.com", "你好，很高兴认识你!","周三下午开个会吧~周三下午开个会吧~周三下午开个会吧~周三下午开个会吧~周三下午开个会吧~周三下午开个会吧~周三下午开个会吧~" +
-//                            "" +
-//                            "来自网易客户端" );
-////                    new EmailSent().doSendHtmlEmail("sdgdfg" , "防守打法阿达士大夫" , "1664222121@qq.com");
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }).start();
+        SimpleMailSender serviceSms = new SimpleMailSender("runningmaggot@163.com",
+                "luziqi123");
+        try {
+            serviceSms.send("317190880@qq.com" , "短信提醒" , "aaaaaaaaaaaa");
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
 
     }
 
