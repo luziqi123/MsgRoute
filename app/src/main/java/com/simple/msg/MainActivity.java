@@ -15,12 +15,9 @@ import com.simple.msg.config.Note;
 import com.simple.msg.message.MsgFactory;
 import com.simple.msg.message.MsgManager;
 import com.simple.msg.util.Constant;
-import com.simple.msg.util.email_sent.SimpleMailSender;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.mail.MessagingException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,14 +40,6 @@ public class MainActivity extends AppCompatActivity {
 
         initDate();
 
-
-        SimpleMailSender serviceSms = new SimpleMailSender("runningmaggot@163.com",
-                "luziqi123");
-        try {
-            serviceSms.send("317190880@qq.com" , "短信提醒" , "aaaaaaaaaaaa");
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        }
 
     }
 
