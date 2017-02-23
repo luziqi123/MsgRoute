@@ -44,6 +44,8 @@ build
 
 .gradle
 
+gradle
+
 out
 
 build.xml
