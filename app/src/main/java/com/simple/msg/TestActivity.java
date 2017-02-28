@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import com.longface.lazyui.DynamicView.DynamicView;
+import com.longface.lazyui.DynamicView.TypeTodo;
 import com.longface.lazyui.DynamicView.TypeView;
 
 import java.util.ArrayList;
@@ -22,7 +23,6 @@ public class TestActivity extends Activity{
         DynamicView listView = (DynamicView)findViewById(R.id.listview);
         listView.setData(new ArrayList<TypeView>());
         listView.setItemClickable(true);
-        listView.setItemAnimator();
-        listView.bindType(R.layout.activity_main , new TypeTodo());
+        listView.bindType(R.layout.activity_main , new TextTodo());
     }
 }
