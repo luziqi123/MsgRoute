@@ -1,1 +1,1 @@
-include ':app', ':lazyutils', ':LazyUI', ':pulllayout'
+include ':app', ':lazyutils', ':LazyUI'
