@@ -3,7 +3,6 @@ package com.simple.msg;
 import android.app.Activity;
 import android.os.Bundle;
 
-
 /**
  * Created by L on 2017/2/23.
  */

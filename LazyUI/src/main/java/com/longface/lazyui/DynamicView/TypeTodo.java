@@ -6,33 +6,33 @@ import android.view.View;
  *
  * Created by Administrator on 2017/2/27.
  */
-public abstract class TypeTodo {
+public abstract class TypeTodo <T>{
 
-    abstract void initView(View view);
+    protected abstract void initView(View view, T data);
 
     /**
      * 单击
      */
-    void onClieck(View view , int posation){}
+    protected void onClieck(View view , int posation , T data){}
 
     /**
      * 长按
      */
-    boolean onLongClick(){
+    protected boolean onLongClick(View view , T data){
         return false;
     }
 
     /**
      * 左滑
      */
-    boolean onLeftTouch(){
+    protected boolean onLeftTouch(View view , T data){
         return false;
     }
 
     /**
      * 右滑
      */
-    boolean onRightTouch(){
+    protected boolean onRightTouch(View view , T data){
         return false;
     }
 }
