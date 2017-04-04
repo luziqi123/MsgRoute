@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.simple.msg.base.BaseActivity;
 import com.simple.msg.config.Note;
 import com.simple.msg.message.MsgFactory;
 import com.simple.msg.message.MsgManager;
@@ -20,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private MsgManager mMsgManager;
 
@@ -32,26 +33,33 @@ public class MainActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        mMsgManager = MsgFactory.getMsgManager(this);
-        mMsgManager.init();
 
         initView();
 
-        initDate();
-
+        initData();
 
     }
 
-    private void initDate() {
+    @Override
+    public int getCentent() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    public void initData() {
+        // 初始化短信管理
+        mMsgManager = MsgFactory.getMsgManager(this);
+        mMsgManager.init();
+
+        // 获取用户列表
         List<User> userGroup = Note.getInstance().getUserGroup();
         list.clear();
         list.addAll(userGroup);
         adapter.notifyDataSetChanged();
     }
 
-    private void initView() {
+    @Override
+    public void initView() {
         adapter = new MyAdapter();
         userListView = (ListView) findViewById(R.id.users);
         numEdit = (EditText) findViewById(R.id.phone);
