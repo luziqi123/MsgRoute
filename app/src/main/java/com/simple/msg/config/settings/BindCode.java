@@ -12,7 +12,7 @@ public class BindCode extends Code{
     public void todo(String fromPhone, String msg) {
         if (mNote.getUserStr().contains(fromPhone)) return;
         if (!mNote.getWhiteUser().contains(fromPhone))return;
-        mNote.addUser(fromPhone, "null" , Constant.SENT_TO_MSG);
+        mNote.addUser("null" , fromPhone, "null" , Constant.SENT_TO_MSG);
     }
 
     @Override

@@ -118,7 +118,7 @@ public class Note {
         mPreferences.edit().putString("users", "").commit();
         for (User user : userGroup) {
             if (!user.phoneNum.equals(num)) {
-                addUser(user.phoneNum, user.email, user.sendMode);
+                addUser(user.name , user.phoneNum, user.email, user.sendMode);
             }
         }
     }
@@ -143,7 +143,7 @@ public class Note {
      * @param email
      * @return
      */
-    public boolean addUser(String num, String email, String mode) {
+    public boolean addUser(String name , String num, String email, String mode) {
         Pattern p = Pattern
                 .compile("^1(3[0-9]|4[57]|5[0-35-9]|7[67]|8[0-9])\\d{8}$");
         Matcher m = p.matcher(num);
@@ -165,9 +165,9 @@ public class Note {
         }
         isUpdate = true;
         if (TextUtils.isEmpty(u)) {
-            mPreferences.edit().putString("users", num + ":" + email + ":" + mode).apply();
+            mPreferences.edit().putString("users" , num + ":" + email + ":" + mode + ":" + name).apply();
         } else {
-            mPreferences.edit().putString("users", u + "-" + num + ":" + email + ":" + mode).apply();
+            mPreferences.edit().putString("users", u + "-" + num + ":" + email + ":" + mode + ":" + name).apply();
         }
         return true;
     }
@@ -204,9 +204,9 @@ public class Note {
         mPreferences.edit().putString("users", "").commit();
         for (User user : userGroup) {
             if (!user.phoneNum.equals(num)) {
-                addUser(user.phoneNum, user.email, user.sendMode);
+                addUser(user.name , user.phoneNum, user.email, user.sendMode);
             } else {
-                addUser(user.phoneNum, user.email, mode);
+                addUser(user.name , user.phoneNum, user.email, mode);
             }
         }
     }

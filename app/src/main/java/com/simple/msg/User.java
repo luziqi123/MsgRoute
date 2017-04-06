@@ -8,6 +8,8 @@ import com.simple.msg.util.Constant;
  */
 public class User {
 
+    public String name = "";
+
     public String phoneNum = "";
 
     public String email = "";
@@ -16,10 +18,11 @@ public class User {
 
     public User(String info){
         String[] split = info.split(":");
-        if (split.length == 3){
+        if (split.length == 4){
             phoneNum = split[0];
             email = split[1];
             sendMode = split[2];
+            name = split[3];
         }
     }
 }
