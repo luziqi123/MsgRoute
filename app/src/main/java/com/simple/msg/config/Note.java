@@ -112,7 +112,13 @@ public class Note {
      */
     public void deleUser(String num) {
         String u = getUserStr();
-        if (!u.contains(num)) return;
+        if ("".equals(u)){
+            userList.clear();
+            return;
+        }
+        if (!u.contains(num)) {
+            return;
+        }
         isUpdate = true;
         List<User> userGroup = getUserGroup();
         mPreferences.edit().putString("users", "").commit();

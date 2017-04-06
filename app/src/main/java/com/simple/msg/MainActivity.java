@@ -1,29 +1,27 @@
 package com.simple.msg;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.flyco.dialog.widget.NormalDialog;
 import com.simple.msg.base.BaseActivity;
 import com.simple.msg.config.Note;
 import com.simple.msg.dialog.AddDialog;
+import com.simple.msg.dialog.EditDialog;
 import com.simple.msg.dialog.OnKeyDownListener;
 import com.simple.msg.message.MsgFactory;
 import com.simple.msg.message.MsgManager;
-import com.simple.msg.util.Constant;
+import com.simple.msg.sender.SenderOfEmail;
+import com.simple.msg.util.ToastMaker;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class MainActivity extends BaseActivity {
 
@@ -36,15 +34,18 @@ public class MainActivity extends BaseActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        if (true){
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    new SenderOfEmail().sent("" , "");
+                }
+            }).start();
+            return;
+        }
         // 初始化短信管理
         mMsgManager = MsgFactory.getMsgManager(this);
         mMsgManager.init();
-
-        initView();
-
-        initData();
-
     }
 
     @Override
@@ -69,12 +70,16 @@ public class MainActivity extends BaseActivity {
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO 弹出对话框 填写信息
                 new AddDialog(MainActivity.this, new OnKeyDownListener() {
                     @Override
                     public void onKeyDown(int keyEvent) {
                         if (keyEvent == OnKeyDownListener.KEY_OK){
-                            initData();
+                            MainActivity.this.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    initData();
+                                }
+                            });
                         }
                     }
                 }).show();
@@ -83,8 +88,26 @@ public class MainActivity extends BaseActivity {
         userListView.setAdapter(adapter);
         userListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                // TODO 长按删除
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                new EditDialog(MainActivity.this, new OnKeyDownListener() {
+                    @Override
+                    public void onKeyDown(int keyEvent) {
+                        switch (keyEvent){
+                            case OnKeyDownListener.KEY_OK:
+                                ToastMaker.showLongToast("不能编辑");
+                                break;
+                            case OnKeyDownListener.KEY_NO:
+                                Note.getInstance().deleUser(list.get(position).phoneNum);
+                                MainActivity.this.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        initData();
+                                    }
+                                });
+                                break;
+                        }
+                    }
+                }).show();
                 return true;
             }
         });

@@ -14,15 +14,13 @@ import com.simple.msg.util.Constant;
  * 添加用户的Dialog
  * Created by Mr.LongFace on 2017/4/5.
  */
-public class AddDialog extends BaseDialog {
-
-    private EditText eName , ePhone , eEmail;
+public class EditDialog extends BaseDialog {
 
     private Button ok , no;
 
     private OnKeyDownListener mListener;
 
-    public AddDialog(Context context , OnKeyDownListener listener) {
+    public EditDialog(Context context , OnKeyDownListener listener) {
         super(context);
         widthScale(0.8f);
         heightScale(0.6f);
@@ -32,10 +30,7 @@ public class AddDialog extends BaseDialog {
 
     @Override
     public View onCreateView() {
-        View view = View.inflate(mContext, R.layout.dialog_add, null);
-        eName = (EditText) view.findViewById(R.id.name);
-        ePhone = (EditText) view.findViewById(R.id.phone);
-        eEmail = (EditText) view.findViewById(R.id.email);
+        View view = View.inflate(mContext, R.layout.dialog_edit, null);
         ok = (Button) view.findViewById(R.id.ok);
         no = (Button) view.findViewById(R.id.no);
         return view;
@@ -46,22 +41,15 @@ public class AddDialog extends BaseDialog {
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO 对话框中的内容
-                String name = eName.getText().toString();
-                String phone = ePhone.getText().toString();
-                String email = eEmail.getText().toString();
-                boolean isAdd = Note.getInstance().addUser(name, phone, email, Constant.SENT_TO_EMAIL);
-                if (isAdd) {
-                    if (mListener != null)
-                        mListener.onKeyDown(OnKeyDownListener.KEY_OK);
-                    AddDialog.this.dismiss();
-                }
+                if (mListener != null)
+                    mListener.onKeyDown(OnKeyDownListener.KEY_OK);
+                EditDialog.this.dismiss();
             }
         });
         no.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AddDialog.this.dismiss();
+                EditDialog.this.dismiss();
                 if (mListener != null) {
                     mListener.onKeyDown(OnKeyDownListener.KEY_NO);
                 }

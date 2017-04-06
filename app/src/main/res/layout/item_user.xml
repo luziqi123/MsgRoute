@@ -2,26 +2,37 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="150dp"
-    android:layout_marginLeft="20dp"
-    android:layout_marginRight="20dp"
-    android:background="@drawable/back_item"
-    android:gravity="center"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/name"
-        style="@style/TextItem" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/back_item"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/name"
+            android:textColor="@android:color/white"
+            style="@style/TextItem" />
 
-    <TextView
-        android:id="@+id/num"
-        style="@style/TextItem" />
+        <TextView
+            android:id="@+id/num"
+            android:layout_marginTop="6dp"
+            style="@style/TextItem" />
 
-    <TextView
-        android:id="@+id/email"
-        style="@style/TextItem" />
+        <TextView
+            android:id="@+id/email"
+            android:layout_marginTop="6dp"
+            style="@style/TextItem" />
 
-    <TextView
-        android:id="@+id/status"
-        style="@style/TextItem" />
+        <TextView
+            android:id="@+id/status"
+            android:layout_marginTop="6dp"
+            style="@style/TextItem" />
+    </LinearLayout>
 
 </LinearLayout>
