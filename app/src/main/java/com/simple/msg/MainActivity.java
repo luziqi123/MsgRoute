@@ -34,15 +34,6 @@ public class MainActivity extends BaseActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (true){
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    new SenderOfEmail().sent("" , "");
-                }
-            }).start();
-            return;
-        }
         // 初始化短信管理
         mMsgManager = MsgFactory.getMsgManager(this);
         mMsgManager.init();
@@ -86,9 +77,9 @@ public class MainActivity extends BaseActivity {
             }
         });
         userListView.setAdapter(adapter);
-        userListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        userListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                 new EditDialog(MainActivity.this, new OnKeyDownListener() {
                     @Override
                     public void onKeyDown(int keyEvent) {
@@ -108,7 +99,6 @@ public class MainActivity extends BaseActivity {
                         }
                     }
                 }).show();
-                return true;
             }
         });
     }

@@ -36,9 +36,6 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 
     @Override
     public void onClick(View v) {
-        String viewID = v.getContext().getPackageName();
-        viewID += v.getId();
-        TrackManager.getInstance().step(viewID);
     }
 
     /**
